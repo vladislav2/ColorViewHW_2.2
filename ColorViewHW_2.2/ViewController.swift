@@ -21,25 +21,32 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    changeBackgroundColorView()
+    changeBackgroundColorView(slider: nil)
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     colorsView.layer.cornerRadius = 16
   }
-  
 
   @IBAction func sliderValueChanged(_ sender: UISlider) {
-    changeBackgroundColorView()
+    changeBackgroundColorView(slider: sender)
   }
   
-  private func changeBackgroundColorView() {
+  private func changeBackgroundColorView(slider: UISlider?) {
     colorsView.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
-    redLabel.text = String(format: "%.2f", redSlider.value)
-    greenLabel.text = String(format: "%.2f", greenSlider.value)
-    blueLabel.text = String(format: "%.2f", blueSlider.value)
+    switch slider {
+    case redSlider:
+      redLabel.text = String(format: "%.2f", redSlider.value)
+    case greenSlider:
+      greenLabel.text = String(format: "%.2f", greenSlider.value)
+    case blueSlider:
+      blueLabel.text = String(format: "%.2f", blueSlider.value)
+    default:
+      redLabel.text = String(format: "%.2f", redSlider.value)
+      greenLabel.text = String(format: "%.2f", greenSlider.value)
+      blueLabel.text = String(format: "%.2f", blueSlider.value)
+    }
   }
-  
 }
 
